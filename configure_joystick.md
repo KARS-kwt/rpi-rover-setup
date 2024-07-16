@@ -60,5 +60,37 @@ Changing E3:23:B0:B1:7F:4A trust succeeded
 ```
 
 
+## Custom Joystick Names
+If you're connecting multiple joysticks to the rpi. And you want to dedicate a gamepad to the rover and arm respectively. You have to create a custom symbolic name for the joysticks based on their mac address. 
+
+Use the `99-custom-joystick.rules` for reference, and change the respective MAC addresses (they have to be lowercase to match). 
+
+For non-PS4 clone gamepads. You can discover the attribute details (You need the ATTR{name} and ATTR{uniq} or ATTR{address}, depending on which one has the MAC address)
+The following command will display the joystick info, use it to edit the `99-custom-joystick.rules` for each joystick used.
+```cmd
+udevadm info -a -n /dev/input/js0
+```
+
+When ready, copy the rules file to the `udev/rules.d` folder
+```cmd
+sudo cp 99-custom-joystick.rules /etc/udev/rules.d/99-custom-joystick.rules
+```
+
+and reload and trigger the new rules
+```
+sudo udevadm control --reload-rules && sudo udevadm trigger
+```
+
+If you discover the input devices you should see the new symbolic names
+```cmd
+ls -l /dev/input/
+```
+
+```
+kars@robot-ali:~/rpi-rover-setup $ ls -l /dev/input/
+by-path/        event2          event5          event8          joystick-rover  mice
+event0          event3          event6          event9          js0             mouse0
+event1          event4          event7          joystick-arm    js1             mouse1
+```
 
 

@@ -1,0 +1,14 @@
+[Unit]
+Description=Gamepad Controller
+After=bluetooth.service
+Requires=bluetooth.service
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/sleep 5
+ExecStart=/usr/bin/bluetoothctl connect E3:23:B0:B1:7F:4A
+Restart=on-failure
+User=root
+
+[Install]
+WantedBy=multi-user.target

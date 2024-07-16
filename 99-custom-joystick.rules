@@ -1,0 +1,4 @@
+# Joystick 1
+SUBSYSTEM=="input", ATTRS{name}=="Wireless Controller", ATTRS{uniq}=="e3:23:b0:b1:7f:4a", SYMLINK+="input/joystick-rover"
+# Joystick 2
+SUBSYSTEM=="input", ATTRS{name}=="Wireless Controller", ATTRS{uniq}=="eb:f3:9a:25:fb:22", SYMLINK+="input/joystick-arm"
